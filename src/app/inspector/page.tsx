@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import BoundingBoxCanvas from "@/components/BoundingBoxCanvas";
 import UploadArea from "@/components/UploadArea";
@@ -16,6 +16,14 @@ export default function InspectorPage() {
   const [results, setResults] = useState<typeof mockResults | null>(null);
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState({ signatures: true, stamps: true, qr_codes: true });
+
+  const processedRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (results && processedRef.current) {
+      processedRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [results]);
 
   const handleFileChange = (f: File) => {
     setFile(f);
@@ -72,7 +80,7 @@ export default function InspectorPage() {
           )}
         </div>
         {results && (
-          <div className="w-full max-w-2xl mt-8 bg-black/70 rounded-xl shadow-lg p-6 flex flex-col items-center">
+          <div ref={processedRef} className="w-full max-w-2xl mt-8 bg-black/70 rounded-xl shadow-lg p-6 flex flex-col items-center">
             <h2 className="text-xl font-bold mb-4">Processed Document</h2>
             <div className="mb-4 flex gap-4">
               <label className="flex items-center gap-2">
