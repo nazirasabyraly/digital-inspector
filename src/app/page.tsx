@@ -1,8 +1,33 @@
 import Image from "next/image";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      <Navbar />
+      <section className="flex flex-col items-center justify-center h-screen pt-24">
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-white mb-4 animate-fadeIn">
+          Automating Project Reviews & Compliance
+        </h1>
+        <h2 className="text-lg font-light text-white/60 mb-8">
+          For Governments, Enterprises & Innovators
+        </h2>
+        <div className="bg-black/70 border border-white/10 rounded-xl shadow-lg p-6 w-full max-w-xl flex flex-col items-start relative">
+          <div className="flex gap-2 mb-2">
+            <span className="w-3 h-3 rounded-full bg-red-500" />
+            <span className="w-3 h-3 rounded-full bg-yellow-400" />
+            <span className="w-3 h-3 rounded-full bg-green-500" />
+          </div>
+          <pre className="text-white font-mono text-sm opacity-90">
+{`import { DigitalInspector } from 'digital-inspector';
+const inspector = new DigitalInspector();
+await inspector.load(); // Ready to detect signatures, stamps, QR codes!`}
+          </pre>
+        </div>
+        <a href="/inspector" className="mt-8 px-8 py-3 rounded-full border border-white text-white font-bold tracking-wide hover:bg-white/10 transition shadow-lg">
+          Try Digital Inspector
+        </a>
+      </section>
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
