@@ -51,7 +51,7 @@ export default function InspectorPage() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-white font-sans relative pb-12">
+    <main className="min-h-screen bg-black text-white font-sans relative pb-12 overflow-x-hidden overflow-y-auto">
       <Navbar />
       <div className="flex flex-col items-center justify-center pt-32">
         <h1 className="text-3xl font-bold mb-2 tracking-wide">Document Processor</h1>
@@ -88,6 +88,22 @@ export default function InspectorPage() {
                 <span className="text-yellow-400">QR Codes</span>
               </label>
             </div>
+            {imageUrl && (
+              <div className="w-full flex flex-col items-center mb-6">
+                <div className="bg-black/80 border border-white/20 rounded-xl shadow-lg p-4 flex flex-col items-center w-full max-w-md">
+                  <div className="flex items-center gap-3 mb-2">
+                    <svg width="40" height="40" fill="none" viewBox="0 0 24 24" className="text-indigo-400">
+                      <rect x="3" y="6" width="18" height="12" rx="3" fill="currentColor" />
+                      <rect x="7" y="10" width="10" height="4" rx="1" fill="#fff" />
+                    </svg>
+                    <span className="text-white font-mono text-lg truncate max-w-xs">Preview</span>
+                  </div>
+                  <div className="w-full h-48 bg-gradient-to-br from-black via-gray-900 to-indigo-900 rounded-lg flex items-center justify-center">
+                    <span className="text-white/40 font-mono text-xl">{file?.name || "No file selected"}</span>
+                  </div>
+                </div>
+              </div>
+            )}
             {imageUrl && <BoundingBoxCanvas imageUrl={imageUrl} boxes={getBoxes()} />}
             <button className="mt-6 w-full py-3 rounded-lg bg-green-600 text-white font-bold text-lg shadow-lg hover:brightness-110 transition">
               Download Processed Image

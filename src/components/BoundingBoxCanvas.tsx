@@ -38,7 +38,6 @@ const BoundingBoxCanvas: React.FC<Props> = ({ imageUrl, boxes }) => {
                 fontSize={16}
                 fontFamily="monospace"
                 fontWeight="bold"
-                textShadow="0 0 8px #000"
               >
                 {box.label}
               </text>
