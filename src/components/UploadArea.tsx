@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 interface UploadAreaProps {
   onFileChange: (file: File) => void;
@@ -6,10 +6,12 @@ interface UploadAreaProps {
 
 const UploadArea: React.FC<UploadAreaProps> = ({ onFileChange }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [fileName, setFileName] = useState<string>("");
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setFileName(e.dataTransfer.files[0].name);
       onFileChange(e.dataTransfer.files[0]);
     }
   };
@@ -20,6 +22,7 @@ const UploadArea: React.FC<UploadAreaProps> = ({ onFileChange }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
+      setFileName(e.target.files[0].name);
       onFileChange(e.target.files[0]);
     }
   };
@@ -32,7 +35,11 @@ const UploadArea: React.FC<UploadAreaProps> = ({ onFileChange }) => {
         onDragOver={e => e.preventDefault()}
         onClick={handleClick}
       >
-        <span className="text-white/70 font-mono">Drag & drop JPG, PNG, or PDF here</span>
+        {fileName ? (
+          <span className="text-white font-mono text-lg">{fileName}</span>
+        ) : (
+          <span className="text-white/70 font-mono">Drag & drop JPG, PNG, or PDF here</span>
+        )}
         <input
           ref={inputRef}
           type="file"
